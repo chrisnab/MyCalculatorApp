@@ -8,9 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.example.crist.mycalculatorapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,12 +21,103 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*
+         @Author: Artin
+         Getting the textField, makinging it uneditable, and setting its text size
+          */
+        final EditText textField = (EditText) findViewById(R.id.textField);
+        textField.setEnabled(false);
+        textField.setTextSize(50);
+
+        /*
+        @Author: Artin
+        Getting all the number buttons and providing functionality to them
+         */
+        Button num0 = (Button)findViewById(R.id.num0);
+        num0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                textField.setText(textField.getText() + "0");
+            }
+        });
+
+        Button num1 = (Button)findViewById(R.id.num1);
+        num1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "1");
+            }
+        });
+
+       Button num2 = (Button)findViewById(R.id.num2);
+        num2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "2");
+            }
+        });
+
+        Button num3 = (Button)findViewById(R.id.num3);
+        num3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "3");
+            }
+        });
+
+        Button num4 = (Button)findViewById(R.id.num4);
+        num4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "4");
+            }
+        });
+
+        Button num5 = (Button)findViewById(R.id.num5);
+        num5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "5");
+            }
+        });
+
+        Button num6 = (Button)findViewById(R.id.num6);
+        num6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "6");
+            }
+        });
+
+        Button num7 = (Button)findViewById(R.id.num7);
+        num7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "7");
+            }
+        });
+
+        Button num8 = (Button)findViewById(R.id.num8);
+        num8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "8");
+            }
+        });
+
+        Button num9 = (Button)findViewById(R.id.num9);
+        num9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + "9");
+            }
+        });
+
+        Button clear = (Button)findViewById(R.id.clear);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textField.setText("");
             }
         });
     }
@@ -41,12 +135,7 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
+
 }
