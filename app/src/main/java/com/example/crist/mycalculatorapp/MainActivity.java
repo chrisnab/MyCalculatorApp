@@ -14,6 +14,32 @@ import android.widget.EditText;
 import com.example.crist.mycalculatorapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    /**
+     * Value of the first number
+     */
+    private double num1 = Double.NaN;
+
+    /**
+     * value of the second number
+     */
+    private double num2;
+
+    /**
+     * Static final fields to hold all possible operations of the calculator
+     */
+    private static final char ADDITION = '+';
+    private static final char SUBTRACTION = '-';
+    private static final char MULTIPLICATION = '*';
+    private static final char DIVISION = '/';
+
+    /**
+     * character to keep track of current operation
+     */
+    private char CURRENT_ACTION;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         /*
          @Author: Artin
-         Getting the textField, makinging it uneditable, and setting its text size
+         Getting the textField, making it uneditable, and setting its text size
           */
         final EditText textField = (EditText) findViewById(R.id.textField);
         textField.setEnabled(false);
@@ -120,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
                 textField.setText("");
             }
         });
+
+        //TODO: Add funtionality for operations
     }
 
     @Override
