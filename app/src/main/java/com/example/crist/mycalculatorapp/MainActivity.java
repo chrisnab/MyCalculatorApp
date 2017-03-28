@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private char CURRENT_ACTION;
 
-    DecimalFormat decimalFormat = new DecimalFormat("#.##########");
+    DecimalFormat decimalFormat = new DecimalFormat("#.#####");
 
 
 
@@ -143,6 +143,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 textField.setText(textField.getText() + "9");
+            }
+        });
+
+        Button decimal = (Button) findViewById(R.id.decimal);
+        decimal.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                textField.setText(textField.getText() + ".");
             }
         });
 
