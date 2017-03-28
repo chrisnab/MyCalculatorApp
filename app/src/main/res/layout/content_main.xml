@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="500dp"
+    android:paddingTop="50dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main"
-    tools:context="com.example.crist.mycalculatorapp.MainActivity">
+    tools:context="com.example.crist.mycalculatorapp.MainActivity"
+    tools:showIn="@layout/activity_main">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="499dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="6dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_input_delete"
+        android:paddingBottom="50dp"
+        android:paddingTop="50dp"
+        android:transitionGroup="true"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="5dp">
 
         <Button
             android:id="@+id/num1"
@@ -103,10 +107,10 @@
             android:id="@+id/subt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
             android:layout_above="@+id/num2"
+            android:layout_toEndOf="@+id/num2"
             android:layout_toRightOf="@+id/num2"
-            android:layout_toEndOf="@+id/num2" />
+            android:text="-" />
 
         <Button
             android:id="@+id/num7"
@@ -149,8 +153,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/mult"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignEnd="@+id/mult"
+            android:layout_alignRight="@+id/mult"
+            android:layout_toRightOf="@+id/num3"
             android:text="/" />
 
         <Button
@@ -167,10 +172,10 @@
             android:id="@+id/clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="C"
             android:layout_above="@+id/num2"
             android:layout_toLeftOf="@+id/num5"
-            android:layout_toStartOf="@+id/num5" />
+            android:layout_toStartOf="@+id/num5"
+            android:text="C" />
 
         <Button
             android:id="@+id/num0"
@@ -197,13 +202,28 @@
             android:id="@+id/textField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/subt"
-            android:layout_alignLeft="@+id/clear"
+            android:layout_above="@+id/delete"
+            android:layout_alignLeft="@+id/num1"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignStart="@+id/clear"
+            android:layout_alignParentTop="false"
+            android:layout_alignStart="@+id/num1"
+            android:layout_alignTop="@id/textField"
+            android:elevation="1dp"
             android:ems="10"
-            android:inputType="numberSigned" />
+            android:gravity="top"
+            android:inputType="numberSigned"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/divide"
+            android:layout_alignLeft="@+id/divide"
+            android:layout_alignStart="@+id/divide"
+            android:background="@android:drawable/ic_input_delete"
+            android:backgroundTint="@android:color/darker_gray" />
 
     </RelativeLayout>
 

@@ -21,21 +21,23 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <include layout="@layout/content_main"
-        android:id="@+id/include2" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <include
+                android:id="@+id/include2"
+                layout="@layout/content_main"
+                android:layout_width="438dp" />
+        </LinearLayout>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

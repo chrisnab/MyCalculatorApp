@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.crist.mycalculatorapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
           */
         final EditText textField = (EditText) findViewById(R.id.textField);
         textField.setEnabled(false);
-        textField.setTextSize(50);
+        textField.setTextSize(32);
 
         /*
         @Author: Artin
@@ -147,6 +146,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button delete = (Button) findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(textField.getText().length()>0)
+                    textField.getText().delete(textField.getText().length()-1, textField.getText().length());
+            }
+        });
         //TODO: Add funtionality for operations
     }
 
