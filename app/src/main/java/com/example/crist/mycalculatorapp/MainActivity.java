@@ -160,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 textField.setText("");
                 result.setText("");
-                val1=val2 =0;
+                val1= Double.NaN;
+                val2 =0;
             }
         });
 
