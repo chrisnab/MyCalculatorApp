@@ -1,5 +1,6 @@
 package com.example.crist.mycalculatorapp;
 
+import java.text.DecimalFormat;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,12 +19,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Value of the first number
      */
-    private double num1 = Double.NaN;
+    private double val1 = Double.NaN;
 
     /**
      * value of the second number
      */
-    private double num2;
+    private double val2;
 
     /**
      * Static final fields to hold all possible operations of the calculator
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
      * character to keep track of current operation
      */
     private char CURRENT_ACTION;
+
+    DecimalFormat decimalFormat = new DecimalFormat("#.##########");
 
 
 
@@ -53,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         final EditText textField = (EditText) findViewById(R.id.textField);
         textField.setEnabled(false);
         textField.setTextSize(32);
+
+        final TextView result = (TextView)findViewById(R.id.Result);
+        result.setEnabled(false);
+        result.setTextSize(25);
 
         /*
         @Author: Artin
@@ -143,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 textField.setText("");
+                result.setText("");
             }
         });
 
@@ -154,7 +163,68 @@ public class MainActivity extends AppCompatActivity {
                     textField.getText().delete(textField.getText().length()-1, textField.getText().length());
             }
         });
-        //TODO: Add funtionality for operations
+
+        /**
+         * Providing functionality to the add, divide,multiply, subtract and equal buttons.
+         * Each button calls compute when clicked and displays the result on the result TextView.
+         */
+
+        Button add = (Button)findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compute();
+                CURRENT_ACTION = ADDITION;
+                result.setText(decimalFormat.format(val1) + "+");
+                textField.setText("");
+            }
+        });
+
+        Button sub = (Button)findViewById(R.id.subt);
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compute();
+                CURRENT_ACTION = SUBTRACTION;
+                result.setText(decimalFormat.format(val1) + "-");
+                textField.setText("");
+            }
+        });
+
+        Button mult = (Button)findViewById(R.id.mult);
+        mult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compute();
+                CURRENT_ACTION = MULTIPLICATION;
+                result.setText(decimalFormat.format(val1) + "*");
+                textField.setText("");
+            }
+        });
+
+        Button div = (Button)findViewById(R.id.divide);
+        div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compute();
+                CURRENT_ACTION = DIVISION;
+                result.setText(decimalFormat.format(val1) + "/");
+                textField.setText("");
+            }
+        });
+
+        Button equal = (Button)findViewById(R.id.equal);
+        equal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                compute();
+                result.setText(result.getText().toString() + decimalFormat.format(val2) + " = " + decimalFormat.format(val1));
+                val1 = Double.NaN;
+                CURRENT_ACTION = 0;
+            }
+        });
+
+
     }
 
     @Override
@@ -173,4 +243,31 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Function to compute the result of the operation. Uses the value of val1 and val2 to compute
+     * the result. Checks to see what the value of the CURRENT_ACTION is and does the computation
+     * accordingly. if the value of val1 is not a valid number, it adds whatever there is in the
+     * textField to val1.
+     */
+
+    private void compute(){
+        if(!Double.isNaN(this.val1)){
+            this.val2 = Double.parseDouble(((EditText)findViewById(R.id.textField)).getText().toString());
+            ((EditText)findViewById(R.id.textField)).setText("");
+
+            if(CURRENT_ACTION == ADDITION)
+                val1 +=val2;
+            else if(CURRENT_ACTION == SUBTRACTION)
+                val1-=val2;
+            else if(CURRENT_ACTION == MULTIPLICATION)
+                val1*=val2;
+            else if(CURRENT_ACTION == DIVISION)
+                val1/=val2;
+        }
+        else{
+            try {
+                val1 = Double.parseDouble(((EditText) findViewById(R.id.textField)).getText().toString());
+            }catch (Exception e){}
+        }
+    }
 }
