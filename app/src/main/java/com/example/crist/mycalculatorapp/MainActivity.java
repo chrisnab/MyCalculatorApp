@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private double val2;
 
+
+    private double answer = Double.NaN;
     /**
      * Static final fields to hold all possible operations of the calculator
      */
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button decimal = (Button) findViewById(R.id.decimal);
+        final Button decimal = (Button) findViewById(R.id.decimal);
         decimal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -162,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 result.setText("");
                 val1= Double.NaN;
                 val2 =0;
+                answer = Double.NaN;
             }
         });
 
@@ -198,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                 CURRENT_ACTION = SUBTRACTION;
                 result.setText(decimalFormat.format(val1) + "-");
                 textField.setText("");
+
             }
         });
 
@@ -229,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 compute();
                 result.setText(result.getText().toString() + decimalFormat.format(val2) + " = " + decimalFormat.format(val1));
+                answer = val1;
                 val1 = Double.NaN;
                 CURRENT_ACTION = 0;
             }
@@ -273,6 +278,9 @@ public class MainActivity extends AppCompatActivity {
                 val1*=val2;
             else if(CURRENT_ACTION == DIVISION)
                 val1/=val2;
+        }
+        else if(!Double.isNaN(answer)){
+            val1 = answer;
         }
         else{
             try {
