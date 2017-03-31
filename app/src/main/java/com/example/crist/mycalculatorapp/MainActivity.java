@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Class that runs the entire program
+ * @Author: Artin Rezaee, Christian Sanabria, Satyaki Ghosh
+ */
 
 public class MainActivity extends AppCompatActivity {
 
