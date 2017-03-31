@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * character to keep track of current operation
      */
-    private char CURRENT_ACTION;
+    private char CURRENT_ACTION = 0;
 
     DecimalFormat decimalFormat = new DecimalFormat("#.#####");
 
@@ -188,8 +188,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 compute();
                 CURRENT_ACTION = ADDITION;
-                result.setText(decimalFormat.format(val1) + "+");
-                textField.setText("");
+                if(!Double.isNaN(val1)) {
+                    result.setText(decimalFormat.format(val1) + "+");
+                    textField.setText("");
+                }
+                else{
+                    CURRENT_ACTION = 0;
+                }
             }
         });
 
@@ -199,8 +204,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 compute();
                 CURRENT_ACTION = SUBTRACTION;
-                result.setText(decimalFormat.format(val1) + "-");
-                textField.setText("");
+                if(!Double.isNaN(val1)) {
+                    result.setText(decimalFormat.format(val1) + "-");
+                    textField.setText("");
+                }
+                else{
+                    CURRENT_ACTION = 0;
+                }
 
             }
         });
@@ -211,8 +221,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 compute();
                 CURRENT_ACTION = MULTIPLICATION;
-                result.setText(decimalFormat.format(val1) + "*");
-                textField.setText("");
+                if(!Double.isNaN(val1)) {
+                    result.setText(decimalFormat.format(val1) + "*");
+                    textField.setText("");
+                }
+                else{
+                    CURRENT_ACTION = 0;
+                }
             }
         });
 
@@ -222,8 +237,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 compute();
                 CURRENT_ACTION = DIVISION;
-                result.setText(decimalFormat.format(val1) + "/");
-                textField.setText("");
+                if(!Double.isNaN(val1)) {
+                    result.setText(decimalFormat.format(val1) + "/");
+                    textField.setText("");
+                }
+                else{
+                    CURRENT_ACTION = 0;
+                }
             }
         });
 
@@ -232,9 +252,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 compute();
-                result.setText(result.getText().toString() + decimalFormat.format(val2) + " = " + decimalFormat.format(val1));
-                answer = val1;
-                val1 = Double.NaN;
+                if(!Double.isNaN(val1) && CURRENT_ACTION!=0) {
+                    result.setText(result.getText().toString() + decimalFormat.format(val2) + " = " + decimalFormat.format(val1));
+                    answer = val1;
+                    val1 = Double.NaN;
+                }
+                else if(!Double.isNaN(val1) && CURRENT_ACTION == 0){
+                    result.setText(decimalFormat.format(val1));
+                    textField.setText("");
+                    answer = val1;
+                    val1 = Double.NaN;
+                }
+                else{
+                    result.setText("");
+                    textField.setText("");
+                }
                 CURRENT_ACTION = 0;
             }
         });
