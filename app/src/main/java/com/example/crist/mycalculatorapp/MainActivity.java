@@ -30,8 +30,12 @@ public class MainActivity extends AppCompatActivity {
      */
     private double val2;
 
-
+    /**
+     * value answer to keep track of the final answer and allow the user to continue the operation
+     * after pressing the equal button
+     */
     private double answer = Double.NaN;
+
     /**
      * Static final fields to hold all possible operations of the calculator
      */
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private char CURRENT_ACTION = 0;
 
+    /**
+     * Decimal format to format the output
+     */
     DecimalFormat decimalFormat = new DecimalFormat("#.#####");
 
 
@@ -69,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         result.setTextSize(25);
 
         /*
-        @Author: Artin
+        @Author: Christian
         Getting all the number buttons and providing functionality to them
          */
         Button num0 = (Button)findViewById(R.id.num0);
@@ -159,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
                 textField.setText(textField.getText() + ".");
             }
         });
-
         Button clear = (Button)findViewById(R.id.clear);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /**
+         * @Author: Artin, Satyaki
          * Providing functionality to the add, divide,multiply, subtract and equal buttons.
          * Each button calls compute when clicked and displays the result on the result TextView.
          */
@@ -295,12 +302,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * @Author: Artin, Satyaki
      * Function to compute the result of the operation. Uses the value of val1 and val2 to compute
      * the result. Checks to see what the value of the CURRENT_ACTION is and does the computation
      * accordingly. if the value of val1 is not a valid number, it adds whatever there is in the
      * textField to val1.
      */
-
     private void compute(){
         if(!Double.isNaN(this.val1)){
             this.val2 = Double.parseDouble(((EditText)findViewById(R.id.textField)).getText().toString());
