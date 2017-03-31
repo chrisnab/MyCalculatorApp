@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * value of the second number
      */
-    private double val2;
+    private double val2 = Double.NaN;
 
     /**
      * value answer to keep track of the final answer and allow the user to continue the operation
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 textField.setText("");
                 result.setText("");
                 val1= Double.NaN;
-                val2 =0;
+                val2 = Double.NaN;
                 answer = Double.NaN;
             }
         });
@@ -192,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
          * Providing functionality to the add, divide,multiply, subtract and equal buttons.
          * Each button calls compute when clicked and displays the result on the result TextView.
          */
-
         Button add = (Button)findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -262,7 +262,10 @@ public class MainActivity extends AppCompatActivity {
         equal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                compute();
+
+                if(textField.getText().toString().length() != 0 && Character.isDigit(textField.getText().charAt(0)))
+                    compute();
+
                 if(!Double.isNaN(val1) && CURRENT_ACTION!=0) {
                     result.setText(result.getText().toString() + decimalFormat.format(val2) + " = " + decimalFormat.format(val1));
                     answer = val1;
@@ -319,8 +322,12 @@ public class MainActivity extends AppCompatActivity {
                 val1-=val2;
             else if(CURRENT_ACTION == MULTIPLICATION)
                 val1*=val2;
-            else if(CURRENT_ACTION == DIVISION)
-                val1/=val2;
+            else if(CURRENT_ACTION == DIVISION) {
+                if(val2 == 0)
+                    val1 = Double.NaN;
+                else
+                    val1 /= val2;
+            }
         }
         else if(!Double.isNaN(answer)){
             val1 = answer;
